@@ -1,22 +1,23 @@
-# Sourav Kumar – Frontend Portfolio
+## Sourav Kumar – Frontend Portfolio
 
-Lightweight React + Vite portfolio that highlights my deployed frontend, ML, and civic-tech projects with a pastel UI, motion micro-interactions, and Firebase/GitHub deployments.
+Personal React + Vite portfolio highlighting fully deployed frontend and ML projects. The UI uses Tailwind-inspired utilities, custom motion tokens, and Lucide icons to showcase skills, featured work, and contact details in a single-page experience.
 
-## Tech Stack
-- React 19 + TypeScript
-- Tailwind-style utility classes defined in `motion.css`
+### Tech Stack
+- React 19 with TypeScript
+- Custom utility-first styling (motion.css)
 - Vite build tooling
 
-## Local Development
+### Local Development
 ```bash
 npm install
 npm run dev
 ```
 
-## Production Build
+### Production Build
 ```bash
 npm run build
 npm run preview
 ```
 
-The optimized output is generated in `dist/` and is suitable for static hosting platforms such as Firebase Hosting.
+### Deployment
+The site is deployed on Firebase Hosting (`sourav-kumar-portfolio`). Run `firebase deploy` after building to publish updates.
