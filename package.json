@@ -1,10 +1,10 @@
 {
-  "name": "jordan-lee---frontend-engineer-portfolio",
+  "name": "sourav-kumar-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -15,8 +15,10 @@
     "react-dom": "^19.2.3"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

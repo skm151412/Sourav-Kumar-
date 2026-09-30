@@ -27,6 +27,7 @@ export interface Project {
   imageUrl: string;
   demoUrl?: string;
   repoUrl?: string;
+  status?: string;
 }
 
 export interface Stat {
