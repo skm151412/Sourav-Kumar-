@@ -26,7 +26,7 @@ export const About = () => {
 
             <div className="space-y-6">
                {[
-                 { title: 'Deploy-first mindset', desc: 'Firebase Hosting, Render, and GitHub Pages are part of my definition of done. Shipping publicly verifies edge cases and real-world behavior.' },
+                 { title: 'Deploy-first mindset', desc: 'Railway, Render, Firebase Hosting, and GitHub Pages are part of my definition of done. Shipping publicly verifies edge cases and real-world behavior.' },
                  { title: 'Web & Java/Firebase development', desc: 'Designing responsive interfaces with HTML, CSS, and JavaScript, paired with Firebase Authentication and Java services for structured logic and scoring.' },
                  { title: 'Practical machine learning', desc: 'Training regression and classification models using Python, scikit-learn, and pandas, then deploying inference through lightweight Flask web applications.' }
                ].map((item, idx) => (

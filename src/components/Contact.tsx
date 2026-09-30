@@ -38,7 +38,7 @@ export const Contact = () => {
                 className="button-outline-secondary flex items-center justify-between w-full bg-[#26221E] border border-[#342F2A] hover:border-[#F59E0B] hover:bg-[#2C2722] text-[#F5F1EA] font-medium py-3.5 px-5 rounded-[11px] transition-all group"
               >
                 <span className="flex items-center gap-3 text-[#F5F1EA]">
-                  <Github size={20} className="text-[#B8B0A5] group-hover:text-[#F59E0B] transition-colors" />
+                  <Github size={20} className="text-[#F59E0B]" />
                   <span className="font-semibold">GitHub</span>
                 </span>
                 <span className="flex items-center gap-1.5 text-sm text-[#B8B0A5] group-hover:text-[#F59E0B] transition-colors">
@@ -84,7 +84,7 @@ export const Contact = () => {
             </div>
 
             <p className="mt-6 text-sm text-[#81796F] text-center">
-              I deploy on Firebase, GitHub Pages, and Render.
+              I deploy on Railway, Render, Firebase Hosting, and GitHub Pages.
             </p>
           </div>
         </InViewReveal>

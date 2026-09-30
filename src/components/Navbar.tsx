@@ -10,9 +10,88 @@ export const Navbar = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window === 'undefined') return;
+
+    const sectionIds = ['hero', 'about', 'skills', 'projects', 'deployments', 'education', 'contact'];
+
+    const calculateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      // 1. If at the very top of the page, hero is active
+      if (scrollY < 60) {
+        return 'hero';
+      }
+
+      // 2. If scrolled near the bottom of the page, contact is active
+      if (windowHeight + scrollY >= docHeight - 50) {
+        return 'contact';
+      }
+
+      // 3. Fixed navbar is ~70px tall. Detection line at ~130-150px identifies
+      // the section currently occupying the primary viewport area below the navbar.
+      const detectionLine = Math.min(Math.max(windowHeight * 0.25, 110), 160);
+
+      // Check which section contains the detection line
+      for (let i = 0; i < sectionIds.length; i++) {
+        const id = sectionIds[i];
+        const element = document.getElementById(id);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= detectionLine && rect.bottom > detectionLine) {
+          return id;
+        }
+      }
+
+      // 4. Secondary fallback: section with greatest visible area in viewport
+      let maxVisible = 0;
+      let candidate = '';
+      for (let i = 0; i < sectionIds.length; i++) {
+        const id = sectionIds[i];
+        const element = document.getElementById(id);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(windowHeight, rect.bottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+        if (visibleHeight > maxVisible) {
+          maxVisible = visibleHeight;
+          candidate = id;
+        }
+      }
+
+      return candidate;
+    };
+
+    let ticking = false;
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const nextActive = calculateActiveSection();
+          if (nextActive) {
+            setActiveSection(nextActive);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Initialize on mount
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -24,26 +103,6 @@ export const Navbar = () => {
     const timer = window.setTimeout(() => setMounted(true), 100);
     return () => window.clearTimeout(timer);
   }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
-    const sectionIds = ['hero', 'about', 'skills', 'projects', 'deployments', 'education', 'contact'];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id || '');
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '-10% 0px -30% 0px' }
-    );
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -139,7 +198,12 @@ export const Navbar = () => {
           </a>
           <a
             href="#contact"
-            className="px-4.5 py-2 text-[14px] font-semibold bg-[#F59E0B] hover:bg-[#FBBF24] text-[#11100F] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.22)] hover:shadow-[0_4px_14px_rgba(245,158,11,0.20)] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
+            aria-current={activeSection === 'contact' ? 'page' : undefined}
+            className={`px-4.5 py-2 text-[14px] font-semibold text-[#11100F] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.22)] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B] ${
+              activeSection === 'contact'
+                ? 'bg-[#FBBF24] ring-2 ring-[#F59E0B]/80 shadow-[0_4px_14px_rgba(245,158,11,0.25)]'
+                : 'bg-[#F59E0B] hover:bg-[#FBBF24] hover:shadow-[0_4px_14px_rgba(245,158,11,0.20)]'
+            }`}
             style={
               prefersReducedMotion
                 ? undefined
@@ -209,10 +273,18 @@ export const Navbar = () => {
           </a>
           <a 
             href="#contact" 
-            className="text-center py-2.5 bg-[#F59E0B] text-[#11100F] font-semibold text-[14px] rounded-[10px] hover:bg-[#FBBF24] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F59E0B]"
+            aria-current={activeSection === 'contact' ? 'page' : undefined}
+            className={`text-center py-2.5 font-semibold text-[14px] rounded-[10px] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F59E0B] flex items-center justify-center gap-2 ${
+              activeSection === 'contact'
+                ? 'bg-[#FBBF24] text-[#11100F] ring-2 ring-[#F59E0B]/80'
+                : 'bg-[#F59E0B] text-[#11100F] hover:bg-[#FBBF24]'
+            }`}
             onClick={() => setIsOpen(false)}
           >
-            Let's Talk
+            <span>Let's Talk</span>
+            {activeSection === 'contact' && (
+              <span className="text-[11px] font-mono text-[#11100F] uppercase tracking-wider font-bold">active</span>
+            )}
           </a>
         </div>
       )}

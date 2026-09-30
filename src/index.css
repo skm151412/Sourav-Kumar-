@@ -37,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   background-color: var(--bg-primary);
   color-scheme: dark;
 }
@@ -52,6 +53,7 @@ body {
   color: var(--text-secondary);
   line-height: 1.7;
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 /* Custom Dark Scrollbar */

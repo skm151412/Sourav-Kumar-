@@ -5,6 +5,7 @@ import civicfixImage from '../assets/projects/civicfix.png';
 import bookstoreImage from '../assets/projects/bookstore.png';
 import gameImage from '../assets/projects/game.png';
 import housePricePredictionImage from '../assets/projects/housePricePrediction.png';
+import loanDefaultImage from '../assets/projects/LoanDefault.png';
 
 export const projects: Project[] = [
   {
@@ -46,7 +47,7 @@ export const projects: Project[] = [
     problem: 'College lab coursework required evaluating credit risk and identifying indicators for high-risk loan applicants.',
     description: 'Collaborated on an academic machine learning lab project to analyze borrower risk factors. Performed data cleaning and exploratory data analysis using pandas, then trained baseline classification models in scikit-learn, documenting the training pipeline and confusion matrix metrics in the shared academic repository.',
     tech: ['Python', 'pandas', 'scikit-learn', 'EDA'],
-    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: loanDefaultImage,
     repoUrl: 'https://github.com/2410030075/loan-defaulter',
   },
   {
@@ -73,7 +74,7 @@ export const projects: Project[] = [
   },
   {
     id: 'civic-issues',
-    title: 'Crowdsourced Civic Issue Reporting (EPICS)',
+    title: 'Crowdsourced Civic Issue Reporting',
     status: 'Academic Design Prototype',
     problem: 'Communities and academic teams needed structured workflows to document local civic issues and route them to authorities.',
     description: 'Designed as an academic prototype and system design project for the EPICS program. Mapped user workflows for citizens and municipal administrators, structured system specifications, and published an interactive frontend prototype on Firebase to demonstrate issue reporting flows for stakeholder feedback.',

@@ -5,7 +5,7 @@ export const Deployments = () => {
   const platforms = [
     {
       name: 'Railway',
-      detail: 'Assisted Academic Resource Allocation ML app with Spring API and React interface.',
+      detail: 'Academic Resource Allocation System (ARA) with Spring MVC API and React interface.',
       link: 'https://assisted-academic-resource-allocation.onrender.com'
     },
     {

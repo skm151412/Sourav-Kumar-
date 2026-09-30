@@ -15,7 +15,10 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
       direction={index % 2 === 0 ? 'left' : 'right'}
       delay={index * 100}
     >
-      <article className={`project-card bg-[#211E1B] border border-[#342F2A] hover:border-[#443D36] rounded-[18px] w-full flex flex-col lg:flex-row gap-8 lg:gap-12 items-center p-6 sm:p-8 lg:p-9 transition-all duration-200 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+      <article
+        aria-labelledby={`project-title-${project.id}`}
+        className={`project-card bg-[#211E1B] border border-[#342F2A] hover:border-[#443D36] rounded-[18px] w-full flex flex-col lg:flex-row gap-8 lg:gap-12 items-center p-6 sm:p-8 lg:p-9 transition-all duration-200 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+      >
         {/* Project Screenshot */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center">
           <div className="relative rounded-[12px] overflow-hidden border border-[#342F2A] bg-[#171513] shadow-[0_4px_20px_rgba(0,0,0,0.30)]">
@@ -47,7 +50,10 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 </>
               )}
             </div>
-            <h3 className="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-[#F5F1EA] leading-snug">
+            <h3
+              id={`project-title-${project.id}`}
+              className="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-[#F5F1EA] leading-snug"
+            >
               {project.title}
             </h3>
           </div>
